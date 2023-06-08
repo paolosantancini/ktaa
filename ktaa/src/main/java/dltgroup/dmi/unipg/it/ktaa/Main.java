@@ -9,7 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         GroupManager my_keys = new GroupManager();
-        Object my_obj = my_keys.setup();
+        my_keys.setup();
+        
+        
     }
     
 }
