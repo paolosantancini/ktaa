@@ -38,25 +38,24 @@ public class GroupManager {
             while (flag == false) {
                 // calculating q
                 while (flag == false) {
-                    q = rnd.nextInt(1000);
+                    q = 1 + rnd.nextInt(100000);
                     flag = my_math.primeVerify(q);
                 }
-
+                my_rigid_int[0] = q;
                 // calculating p
                 p = 2 * q + 1;
                 flag = my_math.primeVerify(p);
 
             }
-            
+            my_rigid_int[1] = p;
+
             flag = false;
-            // verifyng lenght of safe primes
+            // veryfing lenght of safe primes
             if (q.toString().length() == p.toString().length()) {
                 flag = true;
             }
-        }
 
-        my_rigid_int[0] = q;
-        my_rigid_int[1] = p;
+        }
         my_rigid_int[2] = p * q;
 
         return my_rigid_int;
