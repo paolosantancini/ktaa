@@ -41,9 +41,9 @@ public class GroupManager {
                     q = 1 + rnd.nextInt(100000);
                     flag = my_math.primeVerify(q);
                 }
+                // verifyng if p=(q-1)/2 is also prime
                 my_rigid_int[0] = q;
-                // calculating p
-                p = 2 * q + 1;
+                p = (q-1)/2;
                 flag = my_math.primeVerify(p);
 
             }
@@ -56,8 +56,8 @@ public class GroupManager {
             }
 
         }
-        my_rigid_int[2] = p * q;
-
+        my_rigid_int[2] = p * q;                
+        
         return my_rigid_int;
 
     }
