@@ -1,26 +1,28 @@
 package dltgroup.dmi.unipg.it.ktaa;
 
 /**
- * DltGroup Unipg
- * Bistarelli Stefano, Mercanti Ivan, Santancini Paolo, Santini Francesco
+ * DltGroup Unipg Bistarelli Stefano, Mercanti Ivan, Santancini Paolo, Santini
+ * Francesco
  */
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.Random;
 
 public class MathK {
-    
-    boolean flag;
-        
-    
-    MathK(){
-        flag = false;
+
+    MathK() {
     }
-    
+
     // Fermat Theorem
-    public Boolean primeVerify(int n) {
-        
-        flag = false;
-        if (((Math.pow(2,n))%n) == (2%n)) { flag = true; }
-        
-        return flag;
+    public BigInteger getRigitNumber() {
+
+        int BIT_LENGTH = 2048;
+        Random rand = new SecureRandom();
+        BigInteger p = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
+        BigInteger q = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
+        BigInteger rn = p.multiply(q);
+
+        return rn;
     }
-    
+
 }
