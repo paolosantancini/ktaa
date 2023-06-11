@@ -13,14 +13,35 @@ public class MathK {
     MathK() {
     }
 
-    // Fermat Theorem
+    // Generating rigid number from two safe prime numbers
     public BigInteger getRigitNumber() {
 
-        int BIT_LENGTH = 2048;
+        int BIT_LENGTH = 256;
+        BigInteger subtracting = new BigInteger("1");
+        BigInteger denominator = new BigInteger("2");
+        BigInteger safe_temp;
         Random rand = new SecureRandom();
-        BigInteger p = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
-        BigInteger q = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
-        BigInteger rn = p.multiply(q);
+        Boolean flag = false;
+        BigInteger p= new BigInteger("0");
+        BigInteger q= new BigInteger("0");
+        BigInteger rn;      
+        
+        while (flag == false) {
+            p = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
+            safe_temp = p.subtract(subtracting);
+            safe_temp = safe_temp.divide(denominator);
+            flag = safe_temp.isProbablePrime(BIT_LENGTH / 2);
+        }
+
+        flag = false;
+        while (flag == false) {
+            q = BigInteger.probablePrime(BIT_LENGTH / 2, rand);
+            safe_temp = q.subtract(subtracting);
+            safe_temp = safe_temp.divide(denominator);
+            flag = safe_temp.isProbablePrime(BIT_LENGTH / 2);
+        }
+
+        rn = p.multiply(q);
 
         return rn;
     }
