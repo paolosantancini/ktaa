@@ -27,7 +27,8 @@ public class GroupManager {
         MathK mt = new MathK();
         BigInteger rn = mt.getRigitNumber();
         
-        System.out.println("Rigid Number: "+rn.toString()+" lenght: "+rn.toString().length());
+        System.out.println("Rigid Number: "+rn.toString());
+        System.out.println("Lenght: "+rn.bitLength());
         
     }
 }
