@@ -16,7 +16,7 @@ public class MathK {
     // Generating rigid number from two safe prime numbers
     public BigInteger getRigitNumber() {
 
-        int BIT_LENGTH = 256;
+        int BIT_LENGTH = 512;
         BigInteger subtracting = new BigInteger("1");
         BigInteger denominator = new BigInteger("2");
         BigInteger safe_temp;
