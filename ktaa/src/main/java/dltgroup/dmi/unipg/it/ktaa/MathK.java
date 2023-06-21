@@ -10,6 +10,8 @@ import java.util.Random;
 
 public class MathK {
 
+    BigInteger p,q;
+    
     MathK() {
     }
 
@@ -22,8 +24,8 @@ public class MathK {
         BigInteger safe_temp;
         Random rand = new SecureRandom();
         Boolean flag = false;
-        BigInteger p= new BigInteger("0");
-        BigInteger q= new BigInteger("0");
+        p= new BigInteger("0");
+        q= new BigInteger("0");
         BigInteger rn;      
         
         while (flag == false) {
@@ -44,6 +46,32 @@ public class MathK {
         rn = p.multiply(q);
 
         return rn;
+    }
+    
+    /*
+    Select a random number "h" between 2 and p-1.
+    Compute: h^((p-1)/q) mod p. If this value is not 1 then it is generator.
+    We assume that "b"="g". Element "b" from 3.3 of the scientific paper.
+    */
+    public BigInteger getGenerator() {
+        
+        BigInteger g = new BigInteger("0");
+        
+        // DO SOMETHING
+        
+        return g;
+    }
+    
+    /*
+    Get a,a0 as quadratic residue of rigid integer (rn)
+    */
+    public BigInteger getQR() {
+        
+        BigInteger a = new BigInteger("0");
+        
+        // DO SOMETHING
+        
+        return a;
     }
 
 }

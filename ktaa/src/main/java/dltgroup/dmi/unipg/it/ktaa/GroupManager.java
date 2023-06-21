@@ -9,7 +9,10 @@ import java.math.BigInteger;
 
 public class GroupManager {
 
+    MathK mt;
+    
     GroupManager() {
+        mt = new MathK();
     }
 
     // SETUP phase
@@ -24,7 +27,7 @@ public class GroupManager {
     where q is also a prime number.  
      */
     private void rigidInt() {
-        MathK mt = new MathK();
+        
         BigInteger rn = mt.getRigitNumber();
         
         System.out.println("Rigid Number: "+rn.toString());
