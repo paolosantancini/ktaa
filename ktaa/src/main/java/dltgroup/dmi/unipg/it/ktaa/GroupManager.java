@@ -33,5 +33,8 @@ public class GroupManager {
         System.out.println("Rigid Number: "+rn.toString());
         System.out.println("Lenght: "+rn.bitLength());
         
+        mt.getQR();
+                
+        
     }
 }
