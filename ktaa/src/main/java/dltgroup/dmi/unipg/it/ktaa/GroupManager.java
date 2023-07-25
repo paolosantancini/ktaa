@@ -29,12 +29,16 @@ public class GroupManager {
     private void rigidInt() {
         
         BigInteger rn = mt.getRigitNumber();
+        BigInteger[] qr = null;
         
         System.out.println("Rigid Number: "+rn.toString());
         System.out.println("Lenght: "+rn.bitLength());
         
-        mt.getQR();
+        qr = mt.getQR();
                 
+        System.out.println("a: "+qr[0]);
+        System.out.println("a0: "+qr[1]);
+        System.out.println("b: "+qr[2]);
         
     }
 }
