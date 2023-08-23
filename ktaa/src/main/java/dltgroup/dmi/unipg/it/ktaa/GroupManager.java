@@ -18,7 +18,7 @@ public class GroupManager {
     // SETUP phase
     public void setup() {
         // making rigid integer
-        rigidInt();
+        groupkey();
     }
 
     /* Calculate ridid integer number [v=1024 (2v-bit = 2048) == 256 byte]
@@ -26,19 +26,21 @@ public class GroupManager {
     Safe primes are prime numbers of the form p = 2q + 1, 
     where q is also a prime number.  
      */
-    private void rigidInt() {
+    private void groupkey() {
         
+        String random_string;
+        
+        // Get rigid number
         BigInteger rn = mt.getRigitNumber();
         BigInteger[] qr = null;
-        
-        System.out.println("Rigid Number: "+rn.toString());
-        System.out.println("Lenght: "+rn.bitLength());
+               
+        // Get random string
+        random_string = mt.getRandomString();
         
         qr = mt.getQR();
-                
-        System.out.println("a: "+qr[0]);
-        System.out.println("a0: "+qr[1]);
-        System.out.println("b: "+qr[2]);
+
+        // n, Rgm, a, a0, b
+        System.out.println(rn.toString()+" - "+random_string+" - "+qr[0]+" - "+qr[1]+" - "+qr[2]);
         
     }
 }

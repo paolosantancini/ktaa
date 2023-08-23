@@ -16,6 +16,7 @@ public class MathK {
     BigInteger p, q;
     int BIT_LENGTH; // parameter "v"
     BigInteger rn;
+    StringBuilder sb;
     
     /* Security Parameters
     lambda = 2v+k+epsilon
@@ -69,7 +70,7 @@ public class MathK {
     }
 
     /* Generating random string "R" */
-    private static String getRandomString() {
+    public String getRandomString() {
 
         int n = 64;
 
@@ -78,7 +79,7 @@ public class MathK {
                 + "abcdefghijklmnopqrstuvxyz";
 
         // create StringBuffer size of AlphaNumericString
-        StringBuilder sb = new StringBuilder(n);
+        sb = new StringBuilder(n);
 
         for (int i = 0; i < n; i++) {
 
@@ -124,7 +125,7 @@ public class MathK {
 
         BigInteger a, a0, a_1, a0_1, b;
 
-        String myhash = sha256(getRandomString());
+        String myhash = sha256(sb.toString());
 
         // Converting from String to BidInteger with radix eq 16
         // a* 10 chars lenght and b 44 chars lenght
