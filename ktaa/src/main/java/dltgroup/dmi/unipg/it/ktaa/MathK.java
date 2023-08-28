@@ -17,21 +17,16 @@ public class MathK {
     int BIT_LENGTH; // parameter "v"
     BigInteger rn;
     StringBuilder sb;
-    
-    /* Security Parameters
-    lambda = 2v+k+epsilon
-    gamma = lambda+mu+epsilon+8
-    
-    v=1024
-    epsilon=k=mu=160
-    */
-    int lambda, gamma;
-    int k,epsilon,mu = 160;
+    int LAMBDA, TAU, K, EPSILON, MU;
+    Random rand = new SecureRandom();;
+    Buffer bf;
 
     MathK() {
         BIT_LENGTH = 512;
-        lambda = 2*BIT_LENGTH+k+epsilon;
-        gamma = lambda+mu+epsilon+8;
+        LAMBDA = TAU = 2;
+        K = EPSILON = MU = 160;
+        bf  = Buffer.getIstance();
+        bf.setMaxLambda((int) Math.pow(2, LAMBDA));
     }
 
     /* Generating rigid number from two safe prime numbers we call 
@@ -44,7 +39,6 @@ public class MathK {
         BigInteger subtracting = new BigInteger("1");
         BigInteger denominator = new BigInteger("2");
         BigInteger safe_temp;
-        Random rand = new SecureRandom();
         Boolean flag = false;
         p = new BigInteger("0");
         q = new BigInteger("0");
@@ -93,7 +87,7 @@ public class MathK {
             sb.append(AlphaNumericString
                     .charAt(index));
         }
-
+        
         return (sb.toString());
     }
 
@@ -137,9 +131,28 @@ public class MathK {
         a0 = a0_1.modPow(BigInteger.TWO, rn);
         
         BigInteger[] values = { a, a0, b };
-                
+        
         return values;
         
+    }
+    
+    // return an integer of lambda group (0,2^lambda)
+    public int getX(){
+        //rand = new SecureRandom();
+        
+        return (rand.nextInt((int) Math.pow(2, LAMBDA)));
+    }
+    
+    // proof for commit C
+    public boolean verifyX(int value){
+        
+            boolean flag = false;
+            
+            if (value < (bf.getMaxLambda())) {
+                flag = true;
+            }
+            
+        return (flag);
     }
 
 }
