@@ -10,9 +10,9 @@ public class Buffer {
 
     // unique istance
     private static Buffer instance = null;
-    int x1, x2;
-    BigInteger a, a0, b, rn, alpha, beta;
-    BigInteger[] idlist = {BigInteger.ZERO,BigInteger.ZERO};
+    int x1, x2, e;
+    BigInteger a, a0, b, rn, alpha, beta, A;
+    BigInteger[] idlist = {BigInteger.ZERO, BigInteger.ZERO};
     String rgm;
     int lambda_group_max;
 
@@ -68,6 +68,14 @@ public class Buffer {
         beta = value;
     }
 
+    public void setE(int value) {
+        e = value;
+    }
+
+    public void setA_(BigInteger value) {
+        A = value;
+    }
+
     public void updateIDLIST(BigInteger i, BigInteger beta) {
         idlist[0] = i;
         idlist[1] = beta;
@@ -111,6 +119,14 @@ public class Buffer {
 
     public BigInteger getBeta() {
         return (beta);
+    }
+
+    public int getE() {
+        return (e);
+    }
+
+    public BigInteger getA_() {
+        return (A);
     }
 
 }

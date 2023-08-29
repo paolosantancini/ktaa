@@ -39,4 +39,21 @@ public class User {
 
     }
     
+    // proof to validate: (a^x)*a0 = (A^e) mod n
+    public boolean verifyFinalEquation(){
+        Boolean flag = false;
+        
+        BigInteger leftmember = bf.getA0();
+        BigInteger rightmember = bf.getA_();
+        
+        leftmember.multiply(bf.getA().pow(bf.getE()));
+        rightmember.modPow(BigInteger.valueOf(bf.getE()), bf.getRigidNumber());
+        
+        if (leftmember.equals(rightmember)) {
+            flag = true;
+        }
+        
+        return flag;
+    }
+    
 }

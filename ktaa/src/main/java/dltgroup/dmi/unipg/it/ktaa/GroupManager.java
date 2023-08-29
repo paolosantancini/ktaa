@@ -75,5 +75,15 @@ public class GroupManager {
         return (flag);
         
     }
+        
+    // generate 'e' prime number as (2^tau,2^tau+2^lambda)
+    public void createE(){
+        bf.setE(mt.getE());
+    }
+    
+     // generate A as (alpha * a0)^(1/e) mod n
+    public void createA(){
+        bf.setA_(mt.getA());
+    }
 
 }

@@ -12,21 +12,49 @@ public class Ktaa {
         User myuser = new User();
         Buffer bf = Buffer.getIstance();
 
-        // setup phase
+        /**
+         * ***************
+         */
+        /* SETUP PHASE    */
+        /**
+         * ***************
+         */
         grpmng.setup();
-        // joining phase
+        System.out.println("a: " + bf.getA() + " a0: " + bf.getA0() + " b: "
+                + bf.getB() + " Rn: " + bf.getRigidNumber()
+                + " Rgm: " + bf.getRgm());
+
+        /**
+         * ***************
+         */
+        /* JOINING PHASE */
+        /**
+         * ***************
+         */
         myuser.sendCommitC();
         //GM verify user commit C
         if (grpmng.verifyCommitC()) {
-            // user read x2 by groupmanager
+            // user read x2 by groupmanager and set other parameters
             myuser.setParams();
+            // GM verify BETA proof
             if (grpmng.verifyBeta()) {
-                System.out.println("Alpha: " + bf.getAlpha() + " Beta: " + bf.getBeta());
+                // GM generate 'e' prime number 
+                grpmng.createE();
+                grpmng.createA();
+                System.out.println("Alpha: " + bf.getAlpha()
+                        + " Beta: " + bf.getBeta() + " A: "
+                        + bf.getA_()
+                        + " E: " + bf.getE());
+                if (myuser.verifyFinalEquation()) {
+                    // OK. Follow BOUND AND AUTH phases
+                } else {
+                    System.out.println("Something was wrong over verifying final equation!!!");
+                }
             } else {
-                System.out.println("Something goes wrong over verifing BETA!!!");
+                System.out.println("Something was wrong over verifying BETA!!!");
             }
         } else {
-            System.out.println("Something goes wrong over verifing commit C!!!");
+            System.out.println("Something was wrong over verifying commit C!!!");
         }
 
     }

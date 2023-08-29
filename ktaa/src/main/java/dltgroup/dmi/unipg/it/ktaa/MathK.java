@@ -138,9 +138,33 @@ public class MathK {
     
     // return an integer of lambda group (0,2^lambda)
     public int getX(){
-        //rand = new SecureRandom();
         
         return (rand.nextInt((int) Math.pow(2, LAMBDA)));
+    }
+    
+    // return 'e' prime number as integer between (2^tau,2^tau+2^lambda)
+    public int getE(){
+        int myval = 0;
+        int maxval = (int) Math.pow(2, TAU)+(int) Math.pow(2, LAMBDA);
+        
+        // max_lambda < e < max_tau_lambda
+        while (myval < bf.getMaxLambda()){
+         myval = (rand.nextInt(maxval));
+        }
+        
+        return myval;
+        
+    }
+    
+    // generate A as (alpha * a0)^(1/e) mod n
+    public BigInteger getA(){
+        BigInteger A = BigInteger.ZERO;
+        
+        BigInteger prod = bf.getAlpha().multiply(bf.getA0());
+        
+        return (A.modPow(prod.pow(1/bf.getE()), bf.getRigidNumber()));     
+
+        
     }
     
     // proof for commit C
