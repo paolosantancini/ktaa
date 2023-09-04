@@ -27,6 +27,7 @@ public class User {
     public void setParams(){
         
        x = (x1+bf.getX2())%bf.getMaxLambda();
+       System.out.println("X: "+x);
 
        alpha = bf.getA().modPow(BigInteger.valueOf(x), bf.getRigidNumber());
        // proof model b^x

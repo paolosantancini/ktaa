@@ -18,14 +18,15 @@ public class MathK {
     BigInteger rn;
     StringBuilder sb;
     int LAMBDA, TAU, K, EPSILON, MU;
-    Random rand = new SecureRandom();;
+    Random rand = new SecureRandom();
+    ;
     Buffer bf;
 
     MathK() {
         BIT_LENGTH = 512;
-        LAMBDA = TAU = 2;
+        LAMBDA = TAU = 8;
         K = EPSILON = MU = 160;
-        bf  = Buffer.getIstance();
+        bf = Buffer.getIstance();
         bf.setMaxLambda((int) Math.pow(2, LAMBDA));
     }
 
@@ -87,7 +88,7 @@ public class MathK {
             sb.append(AlphaNumericString
                     .charAt(index));
         }
-        
+
         return (sb.toString());
     }
 
@@ -122,60 +123,77 @@ public class MathK {
         String myhash = sha256(sb.toString());
 
         // Converting from String to BidInteger with radix eq 16
-        // a* 10 chars lenght and b 44 chars lenght
-        a_1 = new BigInteger(myhash.substring(0, 10), 16);
-        a0_1 = new BigInteger(myhash.substring(10, 19), 16);
-        b = new BigInteger(myhash.substring(19), 16);
+        // a* 20 chars lenght and b 44 chars lenght        
+        a_1 = new BigInteger(myhash.substring(0, 20), 16);
+        a0_1 = new BigInteger(myhash.substring(20, 39), 16);
+        b = new BigInteger(myhash.substring(39), 16);
 
         a = a_1.modPow(BigInteger.TWO, rn);
         a0 = a0_1.modPow(BigInteger.TWO, rn);
-        
-        BigInteger[] values = { a, a0, b };
-        
+
+        BigInteger[] values = {a, a0, b};
+
         return values;
-        
+
     }
-    
+
     // return an integer of lambda group (0,2^lambda)
-    public int getX(){
-        
-        return (rand.nextInt((int) Math.pow(2, LAMBDA)));
-    }
-    
-    // return 'e' prime number as integer between (2^tau,2^tau+2^lambda)
-    public int getE(){
-        int myval = 0;
-        int maxval = (int) Math.pow(2, TAU)+(int) Math.pow(2, LAMBDA);
-        
-        // max_lambda < e < max_tau_lambda
-        while (myval < bf.getMaxLambda()){
-         myval = (rand.nextInt(maxval));
+    public int getX() {
+        int myrand = 0;
+
+        while (myrand < 10) {
+            myrand = rand.nextInt((int) Math.pow(2, LAMBDA));
         }
-        
-        return myval;
-        
+
+        return (myrand);
     }
-    
+
+    // return 'e' prime number as integer between (2^tau,2^tau+2^lambda)
+    public int getE() {
+        int myval = 0;
+        boolean flag = false;
+        int maxval = (int) Math.pow(2, TAU) + (int) Math.pow(2, LAMBDA);
+
+        while (flag == false) {
+            // max_lambda < e < max_tau_lambda
+            while (myval < bf.getMaxLambda()) {
+                myval = (rand.nextInt(maxval));
+            }
+            // verify 'e' prime number
+            if ((Math.pow(2, myval) % myval) == (2 % myval)) {
+                flag = true;
+            } else {
+                myval = 0;
+            }
+        }
+
+        return myval;
+
+    }
+
     // generate A as (alpha * a0)^(1/e) mod n
-    public BigInteger getA(){
-        BigInteger A = BigInteger.ZERO;
-        
-        BigInteger prod = bf.getAlpha().multiply(bf.getA0());
-        
-        return (A.modPow(prod.pow(1/bf.getE()), bf.getRigidNumber()));     
+    public BigInteger getA() {
+        BigInteger A;
 
         
+        A = bf.getAlpha().multiply(bf.getA0());
+        System.out.println("A first: " + A);
+        A = A.pow(1/bf.getE());
+        System.out.println("A secondth: " + A);
+
+        return (A.mod(bf.getRigidNumber()));
+
     }
-    
+
     // proof for commit C
-    public boolean verifyX(int value){
-        
-            boolean flag = false;
-            
-            if (value < (bf.getMaxLambda())) {
-                flag = true;
-            }
-            
+    public boolean verifyX(int value) {
+
+        boolean flag = false;
+
+        if (value < (bf.getMaxLambda())) {
+            flag = true;
+        }
+
         return (flag);
     }
 

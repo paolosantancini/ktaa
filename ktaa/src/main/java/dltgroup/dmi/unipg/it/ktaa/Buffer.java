@@ -72,6 +72,7 @@ public class Buffer {
         e = value;
     }
 
+    // Alpha
     public void setA_(BigInteger value) {
         A = value;
     }
@@ -125,6 +126,7 @@ public class Buffer {
         return (e);
     }
 
+    // Alpha
     public BigInteger getA_() {
         return (A);
     }
