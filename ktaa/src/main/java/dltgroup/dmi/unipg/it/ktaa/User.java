@@ -40,15 +40,19 @@ public class User {
 
     }
     
-    // proof to validate: (a^x)*a0 = (A^e) mod n
+    // proof to validate: (a^x)*a0 mod n = (alpha*a0) mod n
+    // if A^e =\alpha a_0 mod n, then A^e =a^x a_0 mod n
     public boolean verifyFinalEquation(){
         Boolean flag = false;
+        BigInteger a0, A, leftmember, rightmember;
         
-        BigInteger leftmember = bf.getA0();
-        BigInteger rightmember = bf.getA_();
+        a0 = bf.getA0();
+        A = bf.getA().pow(x);
+        A = A.multiply(a0);
+        leftmember = A.mod(bf.getRigidNumber());
         
-        leftmember.multiply(bf.getA().pow(bf.getE()));
-        rightmember.modPow(BigInteger.valueOf(bf.getE()), bf.getRigidNumber());
+        rightmember = bf.getAlpha().multiply(a0);
+        rightmember = rightmember.mod(bf.getRigidNumber());
         
         if (leftmember.equals(rightmember)) {
             flag = true;

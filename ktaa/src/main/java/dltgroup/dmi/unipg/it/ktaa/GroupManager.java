@@ -81,7 +81,9 @@ public class GroupManager {
         bf.setE(mt.getE());
     }
     
-     // generate A as (alpha * a0)^(1/e) mod n
+     // A = (alpha * a0)^(1/e) mod n
+    // generate A as the number that elevated to "e" 
+    // is equal to (alpha*a0) mod n
     public void createA(){
         bf.setA_(mt.getA());
     }

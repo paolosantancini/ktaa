@@ -171,17 +171,23 @@ public class MathK {
 
     }
 
-    // generate A as (alpha * a0)^(1/e) mod n
+     // A = (alpha * a0)^(1/e) mod n
+    // generate A as the number that elevated to "e" 
+    // is equal to (alpha*a0) mod n
     public BigInteger getA() {
-        BigInteger A;
+        BigInteger A = BigInteger.ZERO, image;
+        Boolean flag = false;
 
+        // element of codomain
+        image = (bf.getAlpha().multiply(bf.getA0())).mod(bf.getRigidNumber());
         
-        A = bf.getAlpha().multiply(bf.getA0());
-        System.out.println("A first: " + A);
-        A = A.pow(1/bf.getE());
-        System.out.println("A secondth: " + A);
-
-        return (A.mod(bf.getRigidNumber()));
+        // searching for A as the number that elevated to "e" is equal to "image"
+        while(flag == false) {
+            A = A.add(BigInteger.ONE);
+            if (A.pow(bf.getE()) == image) { flag = true; }
+        }
+        
+        return (A);
 
     }
 

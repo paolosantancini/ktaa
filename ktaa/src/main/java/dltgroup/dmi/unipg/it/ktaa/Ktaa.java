@@ -59,6 +59,7 @@ System.out.println("*** JOINING ***");
                 
                 if (myuser.verifyFinalEquation()) {
                     // OK. Follow BOUND AND AUTH phases
+                    System.out.println("Final equation OK!");
                 } else {
                     System.out.println("Something was wrong over verifying final equation!!!");
                 }
