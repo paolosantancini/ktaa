@@ -7,6 +7,16 @@ package dltgroup.dmi.unipg.it.ktaa;
 
 public class ApplicationProvider {
     
-    ApplicationProvider(){}
+    MathK mt;
+    Buffer bf;
+    
+    ApplicationProvider(){
+    mt = new MathK();
+    bf = Buffer.getIstance();
+    }
+    
+    public void setl() {
+        bf.setl(mt.getl());
+    }
     
 }

@@ -19,13 +19,12 @@ public class MathK {
     StringBuilder sb;
     int LAMBDA, TAU, K, EPSILON, MU;
     Random rand = new SecureRandom();
-    ;
     Buffer bf;
 
     MathK() {
-        BIT_LENGTH = 512;
-        LAMBDA = TAU = 8;
-        K = EPSILON = MU = 160;
+        BIT_LENGTH = 8; // 512
+        LAMBDA = TAU = 4; // 8
+        K = EPSILON = MU = 16; // 160
         bf = Buffer.getIstance();
         bf.setMaxLambda((int) Math.pow(2, LAMBDA));
     }
@@ -185,6 +184,7 @@ public class MathK {
         while(flag == false) {
             A = A.add(BigInteger.ONE);
             if (A.pow(bf.getE()) == image) { flag = true; }
+            System.out.println("A: "+A+" e: "+bf.getE()+" img: "+ image);
         }
         
         return (A);
@@ -201,6 +201,12 @@ public class MathK {
         }
 
         return (flag);
+    }
+    
+    // return AP l as value between 0 and 2^(mu+epsilon)
+    public int getl() {
+               
+        return(rand.nextInt(0, (int) Math.pow(2,MU + EPSILON)));
     }
 
 }

@@ -10,7 +10,7 @@ public class Buffer {
 
     // unique istance
     private static Buffer instance = null;
-    int x1, x2, e;
+    int x1, x2, e, l;
     BigInteger a, a0, b, rn, alpha, beta, A;
     BigInteger[] idlist = {BigInteger.ZERO, BigInteger.ZERO};
     String rgm;
@@ -27,6 +27,11 @@ public class Buffer {
         return instance;
     }
 
+    // store AP l value
+    public void setl(int value) {
+        l = value;
+    }
+    
     public void setX1(int value) {
         x1 = value;
     }
