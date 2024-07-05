@@ -1,17 +1,25 @@
 package dltgroup.dmi.unipg.it.ktaa;
 
+import java.math.BigInteger;
+
 public class User {
     
     Parameters pm = Parameters.getIstance();
     Buffer my_buffer = Buffer.getIstance();
     GroupManager gm = new GroupManager();
 
-    int x_prime, z, c, x_second, prime_key;
-    double beta, u, tau, tau_prime;
+    int x_prime, z, c, x_second, prime_key, beta;
+    double u; 
+    BigInteger tau;
+    BigInteger tau_prime;
 
     User() {
         x_prime = 4; // "w"
-        beta = Math.pow(pm.getG(), x_prime); // "h=g^w"
+        //beta = Math.pow(pm.getG(), x_prime); // "h=g^w"
+        beta = 1;
+        for (int i=1;i<=(x_prime);i++) {
+         beta = beta * pm.getG();
+        }
     }
 
     public void sendU2GM() {
@@ -21,7 +29,10 @@ public class User {
     }
     
     public void sendBeta2GM() {
-        beta = Math.pow(pm.getG(), x_prime);
+        beta = 1; // any l is between [0,2^(mu+epsilon)]
+        for (int i=1;i<=x_prime;i++) {
+         beta = beta * pm.getG();
+        }
         System.out.println("User sends beta to GM: " + beta);
         gm.receiveBeta(beta);
         // requesting c to GM
@@ -43,8 +54,15 @@ public class User {
     // Request a search tag and calculate tau
     // Request a tracing tag and calculate tau_prime
     public void doRequest() {
-        int s_tag = my_buffer.getSearchTag();
-        int t_tag = my_buffer.getTracingTag();
-        tau = Math.pow(s_tag, prime_key);
+        BigInteger s_tag = BigInteger.valueOf(my_buffer.getSearchTag());
+        BigInteger t_tag = BigInteger.valueOf(my_buffer.getTracingTag());
+        BigInteger beta_ = BigInteger.valueOf(beta);
+        BigInteger expo = beta_.pow(my_buffer.getElle());        
+
+
+        tau =  s_tag.pow(prime_key);
+        tau_prime =  t_tag.pow(prime_key).multiply(expo);
+        
+        System.out.println("Beta: "+beta+"\nPrime_key: "+prime_key+"\ns_tag: "+s_tag+"\nt_tag: "+t_tag+"\nTau: "+tau+"\nTau_prime: "+tau_prime);
     }
 }

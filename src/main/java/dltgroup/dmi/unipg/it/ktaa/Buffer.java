@@ -1,11 +1,14 @@
 package dltgroup.dmi.unipg.it.ktaa;
 
+import java.util.Random;
+
 public class Buffer {
 
     // unique istance
     private static Buffer instance = null;
 
     int elleset[], searchtag[][], tracingtag[][];
+    Random rand = new Random();
 
     // constructor
     public Buffer() {
@@ -33,6 +36,10 @@ public class Buffer {
         tracingtag = v;
     }
 
+    public int getElle() {
+        return elleset[rand.nextInt(1,elleset.length)];
+    }
+    
     public int getSearchTag() {
         // get last not used value
         int i = 0, st = 0;

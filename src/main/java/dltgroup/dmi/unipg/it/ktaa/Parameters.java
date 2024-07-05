@@ -5,8 +5,7 @@ public class Parameters {
     // unique istance
     private static Parameters instance = null;
     
-    int p, q, r, h, mu, epsilon, ellerange;
-    double g;
+    int p, q, r, h, mu, epsilon, ellerange, g;
   
     Parameters() {
         
@@ -50,10 +49,15 @@ public class Parameters {
     
     private void setG() {
         // g = (h^r) mod p
-        g = Math.pow(h, r) % p;
+        g = 1;
+        for (int i=1;i<=r;i++) {
+         g = g * h;
+        
+    }
+        g = g % p;
     }
     
-    public double getG() {
+    public int getG() {
         return g;
     }
     
