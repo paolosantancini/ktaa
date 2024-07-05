@@ -3,13 +3,15 @@ package dltgroup.dmi.unipg.it.ktaa;
 public class GroupManager {
 
     Parameters pm = Parameters.getIstance();
-    int c, a, z, x_second;
-    double u, beta;
+    Buffer my_buffer;
+    int c, a, z, x_second, beta;
+    double u;
     boolean status;
 
     GroupManager() {
         c = 2;
         x_second = 6;
+        my_buffer = Buffer.getIstance();
     }
 
     public int getC() {
@@ -25,7 +27,7 @@ public class GroupManager {
         u = param;
     }
     
-    public void receiveBeta(double param) {
+    public void receiveBeta(int param) {
         beta = param;
     }
     
@@ -37,10 +39,8 @@ public class GroupManager {
         
         if (checks[0] == checks[1]) { 
             flag = true; 
-            /*
-            TODO: puiblish user beta value to public list
-            */
-            Buffer my_buffer = Buffer.getIstance();
+            // puiblish user beta value to public list
+            my_buffer.setBeta(beta);
         }
         
         System.out.println("g^z= "+checks[0]+" "+"u*(beta^c)= "+checks[1]+ " CHECK STATUS: "+flag);

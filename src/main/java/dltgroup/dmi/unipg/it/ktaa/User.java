@@ -10,8 +10,7 @@ public class User {
 
     int x_prime, z, c, x_second, prime_key, beta;
     double u; 
-    BigInteger tau;
-    BigInteger tau_prime;
+    BigInteger tau,tau_prime;
 
     User() {
         x_prime = 4; // "w"
@@ -57,7 +56,9 @@ public class User {
         BigInteger s_tag = BigInteger.valueOf(my_buffer.getSearchTag());
         BigInteger t_tag = BigInteger.valueOf(my_buffer.getTracingTag());
         BigInteger beta_ = BigInteger.valueOf(beta);
-        BigInteger expo = beta_.pow(my_buffer.getElle());        
+        int l = my_buffer.getElle();
+        BigInteger expo = beta_.pow(l);        
+        my_buffer.saveElle(0, l);
 
 
         tau =  s_tag.pow(prime_key);
@@ -65,4 +66,13 @@ public class User {
         
         System.out.println("Beta: "+beta+"\nPrime_key: "+prime_key+"\ns_tag: "+s_tag+"\nt_tag: "+t_tag+"\nTau: "+tau+"\nTau_prime: "+tau_prime);
     }
+    
+    public BigInteger sendTau(){
+        return tau;
+    }
+    
+    public BigInteger sendTau1(){
+        return tau_prime;
+    }
+    
 }

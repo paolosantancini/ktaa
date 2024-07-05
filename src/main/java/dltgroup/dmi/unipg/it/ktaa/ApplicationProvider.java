@@ -1,5 +1,6 @@
 package dltgroup.dmi.unipg.it.ktaa;
 
+import java.math.BigInteger;
 import java.util.Random;
 
 public class ApplicationProvider {
@@ -44,4 +45,25 @@ public class ApplicationProvider {
         my_buffer.setTracingTag(tracingtag);
     }
 
+    public boolean receiveTau(BigInteger t, BigInteger t1){
+        boolean check_status = false;
+        BigInteger tau = t;
+        BigInteger tau1 = t1;
+        BigInteger v_prime, beta_check;
+        BigInteger beta = BigInteger.valueOf(my_buffer.getBeta());
+        int expo = 0, l1;
+        
+        l1 = my_buffer.getElle();
+        my_buffer.saveElle(1, l1);
+        v_prime = tau.multiply(beta.pow(expo));
+        beta_check = tau1.divide(v_prime);
+        expo = 1 / (my_buffer.l_save-l1);
+        beta_check = beta_check.pow(expo);
+        
+        if (beta.equals(beta_check)) check_status = true;
+        
+        System.out.println("Beta "+beta+" Beta_check: "+beta_check);
+        
+        return check_status;
+    }
 }

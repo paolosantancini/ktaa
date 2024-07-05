@@ -7,7 +7,7 @@ public class Buffer {
     // unique istance
     private static Buffer instance = null;
 
-    int elleset[], searchtag[][], tracingtag[][];
+    int elleset[], searchtag[][], tracingtag[][], beta, l_save, l1_save;
     Random rand = new Random();
 
     // constructor
@@ -22,6 +22,14 @@ public class Buffer {
         return instance;
     }
 
+    public void setBeta(int param) {
+        beta = param;
+    }
+    
+    public int getBeta() {
+        return beta;
+    }
+    
     public void setElle(int v[]) {
         elleset = v;
     }
@@ -37,7 +45,15 @@ public class Buffer {
     }
 
     public int getElle() {
-        return elleset[rand.nextInt(1,elleset.length)];
+        int l = elleset[rand.nextInt(1,elleset.length)]; 
+        // save value
+        
+        return l;
+    }
+    
+    public void saveElle(int index, int value) {
+        if (index == 0) l_save = value;
+        else l1_save = value;
     }
     
     public int getSearchTag() {
