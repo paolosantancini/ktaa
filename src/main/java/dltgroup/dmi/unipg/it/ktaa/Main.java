@@ -4,6 +4,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // K-TAA: example 1 user to 1 AP for k sessions.
+        
         User usr = new User();
         // Setting up AP and Buffer values
         ApplicationProvider ap = new ApplicationProvider();
@@ -12,10 +14,16 @@ public class Main {
         usr.sendBeta2GM();
         if (usr.sendZ2GM()) {
             usr.doRequest();
-            if (ap.receiveTau(usr.sendTau(), usr.sendTau1())) {
-                System.out.println("AP says User can communicate");
+            if (ap.receiveTau(usr.sendTau1())) {
+                System.out.println("AP says User can communicate. PROOF valid!");
+                /* 
+                
+                TODO: AP must counter number of user's beta in logs.
+                If this last value > k then access deny. Else OK.
+                
+                */
             } else {
-                System.out.println("AP says User cannot communicate");
+                System.out.println("AP says User cannot communicate. PROOF not valid!");
             }
         } else {
             System.out.println("Joining faileture");

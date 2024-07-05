@@ -45,24 +45,24 @@ public class ApplicationProvider {
         my_buffer.setTracingTag(tracingtag);
     }
 
-    public boolean receiveTau(BigInteger t, BigInteger t1){
+    public boolean receiveTau(BigInteger t1){
         boolean check_status = false;
-        BigInteger tau = t;
-        BigInteger tau1 = t1;
-        BigInteger v_prime, beta_check;
+        BigInteger v_prime;
+        BigInteger check;
         BigInteger beta = BigInteger.valueOf(my_buffer.getBeta());
-        int expo = 0, l1;
         
-        l1 = my_buffer.getElle();
+        int l1 = my_buffer.getElle(); // l*
         my_buffer.saveElle(1, l1);
-        v_prime = tau.multiply(beta.pow(expo));
-        beta_check = tau1.divide(v_prime);
-        expo = 1 / (my_buffer.l_save-l1);
-        beta_check = beta_check.pow(expo);
+        v_prime = beta.pow(my_buffer.l1_save).multiply(t1);
+
+
         
-        if (beta.equals(beta_check)) check_status = true;
+        // CHECK --> beta == (T'/V')^(1/(l-l*))
+        int expo = 1/(my_buffer.l_save - my_buffer.l1_save);
+        check = t1.divide(v_prime).pow(expo);
+        if (beta.equals(check)) check_status = true;
         
-        System.out.println("Beta "+beta+" Beta_check: "+beta_check);
+        System.out.println("Beta: "+beta+" Check: "+check);
         
         return check_status;
     }

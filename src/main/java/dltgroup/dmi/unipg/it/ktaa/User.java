@@ -56,13 +56,12 @@ public class User {
         BigInteger s_tag = BigInteger.valueOf(my_buffer.getSearchTag());
         BigInteger t_tag = BigInteger.valueOf(my_buffer.getTracingTag());
         BigInteger beta_ = BigInteger.valueOf(beta);
-        int l = my_buffer.getElle();
-        BigInteger expo = beta_.pow(l);        
+        int l = my_buffer.getElle();     
         my_buffer.saveElle(0, l);
 
 
         tau =  s_tag.pow(prime_key);
-        tau_prime =  t_tag.pow(prime_key).multiply(expo);
+        tau_prime =  t_tag.pow(prime_key);
         
         System.out.println("Beta: "+beta+"\nPrime_key: "+prime_key+"\ns_tag: "+s_tag+"\nt_tag: "+t_tag+"\nTau: "+tau+"\nTau_prime: "+tau_prime);
     }
