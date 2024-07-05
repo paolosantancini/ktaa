@@ -2,11 +2,12 @@ package dltgroup.dmi.unipg.it.ktaa;
 
 public class User {
     
-    Parameters pm = new Parameters();
+    Parameters pm = Parameters.getIstance();
+    Buffer my_buffer = Buffer.getIstance();
     GroupManager gm = new GroupManager();
 
     int x_prime, z, c, x_second, prime_key;
-    double beta, u;
+    double beta, u, tau, tau_prime;
 
     User() {
         x_prime = 4; // "w"
@@ -27,7 +28,7 @@ public class User {
         c = gm.getC();
     }
     
-    public void sendZ2GM() {
+    public boolean sendZ2GM() {
         z = pm.getR() + x_prime * c;
         System.out.println("User sendZ2GM: " + z);
         gm.receiveZ(z);
@@ -36,6 +37,14 @@ public class User {
             prime_key = (x_prime+x_second) % pm.getP();
             System.out.println("U prime key: "+prime_key);
         }
+        return(gm.getStatus());
     }
-
+    
+    // Request a search tag and calculate tau
+    // Request a tracing tag and calculate tau_prime
+    public void doRequest() {
+        int s_tag = my_buffer.getSearchTag();
+        int t_tag = my_buffer.getTracingTag();
+        tau = Math.pow(s_tag, prime_key);
+    }
 }

@@ -2,7 +2,7 @@ package dltgroup.dmi.unipg.it.ktaa;
 
 public class GroupManager {
 
-    Parameters pm = new Parameters();
+    Parameters pm = Parameters.getIstance();
     int c, a, z, x_second;
     double u, beta;
     boolean status;
@@ -31,12 +31,16 @@ public class GroupManager {
     
     private boolean check() {
         
-        Boolean flag = true;
+        Boolean flag = false;
         
         double[] checks = {Math.pow(pm.getG(), z), u * (Math.pow(beta, c))};
         
-        if (checks[0] != checks[1]) { 
-            flag = false; 
+        if (checks[0] == checks[1]) { 
+            flag = true; 
+            /*
+            TODO: puiblish user beta value to public list
+            */
+            Buffer my_buffer = Buffer.getIstance();
         }
         
         System.out.println("g^z= "+checks[0]+" "+"u*(beta^c)= "+checks[1]+ " CHECK STATUS: "+flag);

@@ -6,10 +6,16 @@ public class Main {
 
       
     User usr = new User();
+    // Setting up AP and Buffer values
+    ApplicationProvider ap = new ApplicationProvider();
     
     usr.sendU2GM();
     usr.sendBeta2GM();
-    usr.sendZ2GM();
+    if (usr.sendZ2GM()) {
+        usr.doRequest();
+    } else {
+        System.out.println("Joining faileture");
+    }
     
     
     // If Checks are equal then GM knows U had got right nature
