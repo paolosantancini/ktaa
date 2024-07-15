@@ -31,10 +31,11 @@ public class GroupManager {
     }
     
     private void setPubKey() throws UnsupportedEncodingException {
-        // select random a', a0', b directly (at the moment)from Zn
+        // selected random directly from Zn
         a1 = new BigInteger(128, rnd);
         a1_0 = new BigInteger(128, rnd);
-        b = new BigInteger(128, rnd);
+        // selected by G
+        b = pm.groupg[rnd.nextInt(pm.groupg.length)];
 
 // calculating a, a0
         a = a1.pow(2);
