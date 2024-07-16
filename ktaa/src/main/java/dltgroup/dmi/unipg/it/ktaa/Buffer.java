@@ -10,16 +10,19 @@ public class Buffer {
     Random rnd;
     Parameters pm;
     BigInteger n, a, a0, b, alpha, beta;
+    BigInteger[] searching_t, tracing_t;
     String rgm;
-    int lambda_max, tau_max, tau_min;
-    int[] lambda_set, tau_set;
-
+    int lambda_max, tau_max, tau_min, k;
+    int[] lambda_set, tau_set, l_set;
+    BigInteger Tag, Tag1; // User tags
+    
     // constructor
     public Buffer() {
         pm = Parameters.getIstance();
         rnd = new Random();
         lambda_max = pm.lambda_max;
         lambda_set = new int[lambda_max]; // (0,2^lambda)
+        l_set = new int[pm.max_l]; // (0,2^(mu+epsilon))
         tau_max = pm.tau_max;
         tau_min = pm.tau_min;
         tau_set = new int[tau_max]; // (2^lambda,2^tau+2^lambda)
@@ -81,6 +84,15 @@ public class Buffer {
                return  false;
        }
        return true;
+    }
+    
+    // i=0 searching tag, i=1 tracing tag
+    public BigInteger getT(int i) {
+        if (i == 0) {
+         return searching_t[rnd.nextInt(k)];   
+        } else {
+         return tracing_t[rnd.nextInt(k)];   
+        }
     }
     
 }

@@ -21,6 +21,12 @@ public class Main {
         // GM calculate A
         gm.calculateA();
         // Now user public key is defined by (alpha, A^e, beta)
+        
+        // User calculates T and T' for auth process
+        usr.setT();
+        
+        // *** TODO tracing logs ***
+        
     }
 
 }

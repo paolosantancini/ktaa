@@ -1,6 +1,7 @@
 package dltgroup.dmi.unipg.it.ktaa;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Random;
 
 public class User {
 
@@ -36,4 +37,16 @@ public class User {
         System.out.println("User - calculating Beta: "+my_buffer.beta+" with p="+pm.p+" b="+my_buffer.b+" x="+x);
     }
 
+    public void setT() {
+        Random rnd = new Random();
+        
+        int l = my_buffer.l_set[rnd.nextInt(pm.max_l)];
+        
+        my_buffer.Tag = my_buffer.getT(0).pow(x).mod(pm.p);
+        my_buffer.Tag1 = my_buffer.getT(1).multiply(my_buffer.b.pow(l)).mod(pm.p);
+        
+        System.out.println("User - calculating T: "+my_buffer.Tag+" T':"+my_buffer.Tag1);
+        
+    }
+    
 }
