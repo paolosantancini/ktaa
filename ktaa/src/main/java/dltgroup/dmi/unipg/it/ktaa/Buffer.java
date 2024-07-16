@@ -9,10 +9,10 @@ public class Buffer {
     private static Buffer instance = null;
     Random rnd;
     Parameters pm;
-    BigInteger n, a, a0, b;
+    BigInteger n, a, a0, b, alpha, beta;
     String rgm;
-    int lambda_max;
-    int[] lambda_set;
+    int lambda_max, tau_max, tau_min;
+    int[] lambda_set, tau_set;
 
     // constructor
     public Buffer() {
@@ -20,7 +20,11 @@ public class Buffer {
         rnd = new Random();
         lambda_max = pm.lambda_max;
         lambda_set = new int[lambda_max]; // (0,2^lambda)
+        tau_max = pm.tau_max;
+        tau_min = pm.tau_min;
+        tau_set = new int[tau_max]; // (2^lambda,2^tau+2^lambda)
         setLambdaSet();
+        setTauSet();
     }
 
     // create object if it doesn't exist
@@ -46,8 +50,37 @@ public class Buffer {
         }
     }
     
+    private void setTauSet() {
+        for (int i=tau_min;i<tau_max;i++) {
+            tau_set[i] = i;
+        }
+    }
+    
     public int getRandomLambdaValue(){
         return lambda_set[rnd.nextInt(0, lambda_max)];
     }
+    
+    public void setAlpha(BigInteger value) {
+        alpha = value;
+    }
+    
+    public void setBeta(BigInteger value) {
+        beta = value;
+        // Beta is public and should be attached on an user index
+    }
 
+    public boolean isPrime(int num)
+    {
+        if(num<=1)
+        {
+            return false;
+        }
+       for(int i=2;i<=num/2;i++)
+       {
+           if((num%i)==0)
+               return  false;
+       }
+       return true;
+    }
+    
 }

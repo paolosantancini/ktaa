@@ -9,29 +9,18 @@ public class Main {
         
         GroupManager gm = GroupManager.getIstance();
         ApplicationProvider ap = new ApplicationProvider();
+        // Simulation 1 user per 1 service
         User usr = new User();
         
-        /*      
+        // User calculate alpha and Beta
+        usr.calculateAlpha();
+        usr.calculateBeta();
         
-        // Setting up AP and Buffer values
-        ApplicationProvider ap = new ApplicationProvider();
-
-        usr.sendU2GM();
-        usr.sendBeta2GM();
-        if (usr.sendZ2GM()) {
-            usr.doRequest();
-            if (ap.receiveTau(usr.sendTau1())) {
-                System.out.println("AP says User can communicate. PROOF valid!");
-            } else {
-                System.out.println("AP says User cannot communicate. PROOF not valid!");
-            }
-        } else {
-            System.out.println("Joining faileture");
-        } */
-
-        // If Checks are equal then GM knows U had got right nature
-        // (but not the value) of x_prime and sends back x_second.
-        // At the end P creates his private key
+        // GM calculate e
+        gm.setE();
+        // GM calculate A
+        gm.calculateA();
+        // Now user public key is defined by (alpha, A^e, beta)
     }
 
 }

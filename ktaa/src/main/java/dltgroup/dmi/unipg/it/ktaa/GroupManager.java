@@ -12,8 +12,9 @@ public class GroupManager {
     Random rnd = new Random();
 
     // a1, a1_0 ... directly from Zn
-    BigInteger a1, a1_0, b, a, a0;
+    BigInteger a1, a1_0, b, a, a0, ae;
     String rgm;
+    int e;
 
     GroupManager() throws UnsupportedEncodingException {
         System.out.println("GM - Setting parameters...");
@@ -29,7 +30,7 @@ public class GroupManager {
         }
         return instance;
     }
-    
+
     private void setPubKey() throws UnsupportedEncodingException {
         // selected random directly from Zn
         a1 = new BigInteger(128, rnd);
@@ -45,16 +46,35 @@ public class GroupManager {
         byte[] array = new byte[64];
         new Random().nextBytes(array);
         rgm = new String(array, "UTF-8");
-        
+
         System.out.println("### GM PUBLIC KEY ###");
-        System.out.println("a: "+a+"\na0: "+a0+"\nb: "+b+"\nrgm: "+rgm);
-        
+        System.out.println("a: " + a + "\na0: " + a0 + "\nb: " + b + "\nrgm: " + rgm);
+
         my_buffer.setPubKey(pm.getN(), a, a0, b, rgm);
-        
+
     }
 
-    public int getX2(){
+    public int getX2() {
         return my_buffer.getRandomLambdaValue();
     }
+
+    public void setE() {
+        for (int i = pm.tau_min; i < pm.tau_max; i++) {
+            if (my_buffer.isPrime(my_buffer.tau_set[i])) {
+                e = my_buffer.tau_set[i];
+                // delete used element
+                my_buffer.tau_set[i] = 0;
+                // force exit
+                i = pm.tau_max;
+            }
+        }
+        System.out.println("GM - calculating e: "+e);
+    }
     
+    public void calculateA() {
+        // A^e = (alpha * a0) mod n
+        ae = my_buffer.alpha.multiply(my_buffer.a0).mod(my_buffer.n);
+        System.out.println("GM - calculating A^e: "+ae);
+    }
+
 }

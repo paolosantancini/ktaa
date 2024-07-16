@@ -7,8 +7,9 @@ public class ApplicationProvider {
 
     Buffer my_buffer;
     Parameters pm;
-    Random rand = new Random();
+    Random rnd = new Random();
     BigInteger[] searching_t, tracing_t;
+    // max number of requests per user member
     int k = 3;
 
     ApplicationProvider() {
@@ -24,9 +25,9 @@ public class ApplicationProvider {
         System.out.println("AP - Creating searching and tracing tags...");
         for (int i = 0; i < k; i++) {
             // searching tags
-            searching_t[i] = new BigInteger(32, rand);
+            searching_t[i] = pm.groupg[rnd.nextInt(pm.groupg.length)];
             // tracing tags
-            tracing_t[i] = new BigInteger(32, rand);
+            tracing_t[i] = pm.groupg[rnd.nextInt(pm.groupg.length)];
         }
     }
 

@@ -23,5 +23,17 @@ public class User {
         x = (x1+x2) % pm.lambda_max;
         System.out.println("User - Calculating primary key (x): "+x);
     }
+    
+    public void calculateAlpha() {
+        // a^x mod n
+        my_buffer.setAlpha((my_buffer.a.pow(x).mod(my_buffer.n)));
+        System.out.println("User - calculating Alpha: "+my_buffer.alpha);
+    }
+    
+    public void calculateBeta() {
+        // b^x mod p
+        my_buffer.setBeta(my_buffer.b.pow(x).mod(pm.p));
+        System.out.println("User - calculating Beta: "+my_buffer.beta+" with p="+pm.p+" b="+my_buffer.b+" x="+x);
+    }
 
 }
