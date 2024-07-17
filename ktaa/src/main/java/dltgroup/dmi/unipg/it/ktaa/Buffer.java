@@ -10,11 +10,10 @@ public class Buffer {
     Random rnd;
     Parameters pm;
     BigInteger n, a, a0, b, alpha, beta;
-    BigInteger[] searching_t, tracing_t;
+    BigInteger[] searching_t, tracing_t, tag, tag1;
     String rgm;
-    int lambda_max, tau_max, tau_min, k;
+    int lambda_max, tau_max, tau_min;
     int[] lambda_set, tau_set, l_set;
-    BigInteger Tag, Tag1; // User tags
     
     // constructor
     public Buffer() {
@@ -26,6 +25,8 @@ public class Buffer {
         tau_max = pm.tau_max;
         tau_min = pm.tau_min;
         tau_set = new int[tau_max]; // (2^lambda,2^tau+2^lambda)
+        tag = new BigInteger[pm.k];
+        tag1 = new BigInteger[pm.k];
         setLambdaSet();
         setTauSet();
     }
@@ -70,6 +71,7 @@ public class Buffer {
     public void setBeta(BigInteger value) {
         beta = value;
         // Beta is public and should be attached on an user index
+        // (in this case we have just 1 trivial user
     }
 
     public boolean isPrime(int num)
@@ -89,9 +91,9 @@ public class Buffer {
     // i=0 searching tag, i=1 tracing tag
     public BigInteger getT(int i) {
         if (i == 0) {
-         return searching_t[rnd.nextInt(k)];   
+         return searching_t[rnd.nextInt(pm.k)];   
         } else {
-         return tracing_t[rnd.nextInt(k)];   
+         return tracing_t[rnd.nextInt(pm.k)];   
         }
     }
     
