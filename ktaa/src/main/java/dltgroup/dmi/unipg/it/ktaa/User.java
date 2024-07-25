@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class User {
 
-    Parameters pm;
+    Sys pm;
     Buffer my_buffer;
     GroupManager gm;
     Random rnd;
@@ -15,7 +15,7 @@ public class User {
 
     User() throws UnsupportedEncodingException {
         gm = GroupManager.getIstance();
-        pm = Parameters.getIstance();
+        pm = Sys.getIstance();
         my_buffer = Buffer.getIstance();
         rnd = new Random();
         w = 0; // internal counter

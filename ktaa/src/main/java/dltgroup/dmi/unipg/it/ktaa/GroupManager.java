@@ -7,7 +7,7 @@ import java.util.Random;
 public class GroupManager {
 
     private static GroupManager instance = null;
-    Parameters pm;
+    Sys pm;
     Buffer my_buffer;
     Random rnd = new Random();
 
@@ -18,7 +18,7 @@ public class GroupManager {
 
     GroupManager() throws UnsupportedEncodingException {
         System.out.println("GM - Setting parameters...");
-        pm = Parameters.getIstance();
+        pm = Sys.getIstance();
         my_buffer = Buffer.getIstance();
         // set pub key (n, RGM, a, a0, b)
         setPubKey();

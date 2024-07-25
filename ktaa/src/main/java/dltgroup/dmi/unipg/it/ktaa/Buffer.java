@@ -8,7 +8,7 @@ public class Buffer {
     // unique istance
     private static Buffer instance = null;
     Random rnd;
-    Parameters pm;
+    Sys pm;
     BigInteger n, a, a0, b, alpha, beta;
     BigInteger[] searching_t, tracing_t, tag, tag1;
     String rgm;
@@ -17,7 +17,7 @@ public class Buffer {
     
     // constructor
     public Buffer() {
-        pm = Parameters.getIstance();
+        pm = Sys.getIstance();
         rnd = new Random();
         lambda_max = pm.lambda_max;
         lambda_set = new int[lambda_max]; // (0,2^lambda)

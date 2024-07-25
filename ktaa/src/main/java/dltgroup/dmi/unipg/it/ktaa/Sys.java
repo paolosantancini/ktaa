@@ -3,10 +3,10 @@ package dltgroup.dmi.unipg.it.ktaa;
 import java.math.BigInteger;
 import java.util.Random;
 
-public class Parameters {
+public class Sys {
 
     // unique istance
-    private static Parameters instance = null;
+    private static Sys instance = null;
 
     Random rnd = new Random();
     // (p1,p2) GM secret key pair
@@ -21,7 +21,7 @@ public class Parameters {
     int tau_max = lambda_max*2;
     int mu = 8, epsilon = 8, max_l = (int) Math.pow(2, (mu+epsilon));
 
-    Parameters() {
+    Sys() {
 
         k = 3;
         getRigidNumber();
@@ -30,9 +30,9 @@ public class Parameters {
     }
 
     // create object if it doesn't exist
-    public static synchronized Parameters getIstance() {
+    public static synchronized Sys getIstance() {
         if (instance == null) {
-            instance = new Parameters();
+            instance = new Sys();
         }
         return instance;
     }

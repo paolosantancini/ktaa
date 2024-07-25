@@ -6,13 +6,13 @@ import java.util.Random;
 public class ApplicationProvider {
 
     Buffer my_buffer;
-    Parameters pm;
+    Sys pm;
     Random rnd = new Random();
     BigInteger[] searching_t, tracing_t;
 
     ApplicationProvider() {
         my_buffer = Buffer.getIstance();
-        pm = Parameters.getIstance();
+        pm = Sys.getIstance();
         searching_t = new BigInteger[pm.k];
         tracing_t = new BigInteger[pm.k];
         setT();
