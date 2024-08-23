@@ -14,11 +14,11 @@ public class Sys {
     // p (Zp) module of G group
     BigInteger p, p1, p2, n; 
     BigInteger[] groupg; // elements of G
-    int tau_min, k; // k = max number of requests per user member
-    int lambda_max = tau_min = (int) Math.pow(2, 16); // max number of elements of x set (2^lambda)
+    int gamma_min, k; // k = max number of requests per user member
+    int lambda_max = gamma_min = (int) Math.pow(2, 16); // max number of elements of x set (2^lambda)
     // max number of elements of e set (2^tau+2^lambda)
     // in this case lambda = tau
-    int tau_max = lambda_max*2;
+    int gamma_max = lambda_max*2;
     int mu = 8, epsilon = 8, max_l = (int) Math.pow(2, (mu+epsilon));
 
     Sys() {

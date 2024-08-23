@@ -59,13 +59,13 @@ public class GroupManager {
     }
 
     public void setE() {
-        for (int i = pm.tau_min; i < pm.tau_max; i++) {
-            if (my_buffer.isPrime(my_buffer.tau_set[i])) {
-                e = my_buffer.tau_set[i];
+        for (int i = pm.gamma_min; i < pm.gamma_max; i++) {
+            if (my_buffer.isPrime(my_buffer.gamma_set[i])) {
+                e = my_buffer.gamma_set[i];
                 // delete used element
-                my_buffer.tau_set[i] = 0;
+                my_buffer.gamma_set[i] = 0;
                 // force exit
-                i = pm.tau_max;
+                i = pm.gamma_max;
             }
         }
         System.out.println("GM - calculating e: "+e);

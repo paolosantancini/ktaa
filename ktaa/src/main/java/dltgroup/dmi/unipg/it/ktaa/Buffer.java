@@ -12,8 +12,8 @@ public class Buffer {
     BigInteger n, a, a0, b, alpha, beta;
     BigInteger[] searching_t, tracing_t, tag, tag1;
     String rgm;
-    int lambda_max, tau_max, tau_min;
-    int[] lambda_set, tau_set, l_set;
+    int lambda_max, gamma_max, gamma_min;
+    int[] lambda_set, gamma_set, l_set;
     
     // constructor
     public Buffer() {
@@ -22,13 +22,13 @@ public class Buffer {
         lambda_max = pm.lambda_max;
         lambda_set = new int[lambda_max]; // (0,2^lambda)
         l_set = new int[pm.max_l]; // (0,2^(mu+epsilon))
-        tau_max = pm.tau_max;
-        tau_min = pm.tau_min;
-        tau_set = new int[tau_max]; // (2^lambda,2^tau+2^lambda)
+        gamma_max = pm.gamma_max;
+        gamma_min = pm.gamma_min;
+        gamma_set = new int[gamma_max]; // (2^lambda,2^tau+2^lambda)
         tag = new BigInteger[pm.k];
         tag1 = new BigInteger[pm.k];
         setLambdaSet();
-        setTauSet();
+        setGammaSet();
     }
 
     // create object if it doesn't exist
@@ -54,9 +54,9 @@ public class Buffer {
         }
     }
     
-    private void setTauSet() {
-        for (int i=tau_min;i<tau_max;i++) {
-            tau_set[i] = i;
+    private void setGammaSet() {
+        for (int i=gamma_min;i<gamma_max;i++) {
+            gamma_set[i] = i;
         }
     }
     
