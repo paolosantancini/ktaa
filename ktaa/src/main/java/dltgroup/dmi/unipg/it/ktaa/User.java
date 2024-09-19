@@ -41,7 +41,7 @@ public class User {
         System.out.println("User - calculating Beta: " + my_buffer.beta + " with p=" + pm.p + " b=" + my_buffer.b + " x=" + x);
     }
 
-    public BigInteger[] setT() {
+    public BigInteger[] calculateT_T1() {
 
         int l = my_buffer.l_set[rnd.nextInt(pm.max_l)];
 

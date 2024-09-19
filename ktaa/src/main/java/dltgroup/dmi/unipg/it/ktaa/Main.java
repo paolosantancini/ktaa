@@ -24,7 +24,7 @@ public class Main {
 // User self check about number of times service request
         while(usr.checkW()){
 // User calculates T and T' for auth process
-            ap.getService(usr.setT(), usr.getW());
+            ap.getService(usr.calculateT_T1(), usr.getW());
         }
         System.out.println("User ended with "+(usr.getW()+1)+" number of requests (w)");
     }
